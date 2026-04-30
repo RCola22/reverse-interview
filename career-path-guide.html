@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Path Guide — The Complete Playbook</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --border: #252a38;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --accent3: #43e97b;
+    --accent4: #f9a825;
+    --text: #e4e8f0;
+    --text-muted: #8891a8;
+    --text-faint: #555e75;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1030 50%, #0d1a20 100%);
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(108,99,255,0.15);
+    border: 1px solid rgba(108,99,255,0.4);
+    color: #a09dff;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .hero-quote {
+    display: inline-block;
+    border-left: 3px solid var(--accent);
+    padding: 12px 20px;
+    text-align: left;
+    background: rgba(108,99,255,0.08);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-style: italic;
+    color: var(--text-muted);
+    max-width: 500px;
+    font-size: 0.95rem;
+  }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+  .toc a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .toc a:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: rgba(108,99,255,0.1);
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 32px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 72px;
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-faint);
+    padding-top: 6px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+  .section-title-wrap h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  .section-title-wrap .subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .card-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .card .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── LAW CARDS ── */
+  .law-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+  .law-card:hover { border-color: var(--accent); }
+  .law-num {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .law-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .law-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ── STEPS ── */
+  .steps {
+    position: relative;
+    padding-left: 36px;
+  }
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 11px; top: 12px; bottom: 12px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    border-radius: 2px;
+  }
+  .step {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .step::before {
+    content: '';
+    position: absolute;
+    left: -29px; top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .step h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .step p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .step .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 24px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+  .callout-body { flex: 1; }
+  .callout-body strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+  .callout-body p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+  .callout.purple { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.25); }
+  .callout.green { background: rgba(67,233,123,0.08); border: 1px solid rgba(67,233,123,0.2); }
+  .callout.orange { background: rgba(249,168,37,0.08); border: 1px solid rgba(249,168,37,0.2); }
+  .callout.red { background: rgba(255,101,132,0.08); border: 1px solid rgba(255,101,132,0.2); }
+
+  /* ── TABLE ── */
+  .resource-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.875rem;
+  }
+  .resource-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    border-bottom: 1px solid var(--border);
+  }
+  .resource-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .resource-table td:first-child { color: var(--text); font-weight: 500; }
+  .resource-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .resource-table a { color: var(--accent); text-decoration: none; }
+  .resource-table a:hover { text-decoration: underline; }
+
+  /* ── HERO STORY ── */
+  .story-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .story-box .story-label {
+    position: absolute;
+    top: -11px; left: 20px;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 12px;
+    border-radius: 20px;
+  }
+  .story-box p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* ── EMAIL TEMPLATE ── */
+  .email-template {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .email-template .highlight { color: var(--accent3); font-weight: 700; }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    margin: 16px 0;
+  }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '☐';
+    color: var(--accent);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .checklist li strong { color: var(--text); }
+
+  /* ── PILL TAGS ── */
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .pill.purple { color: #a09dff; border-color: rgba(108,99,255,0.4); background: rgba(108,99,255,0.1); }
+  .pill.green { color: #43e97b; border-color: rgba(67,233,123,0.3); background: rgba(67,233,123,0.08); }
+  .pill.orange { color: #f9a825; border-color: rgba(249,168,37,0.3); background: rgba(249,168,37,0.08); }
+  .pill.red { color: #ff6584; border-color: rgba(255,101,132,0.3); background: rgba(255,101,132,0.08); }
+
+  /* ── SAR BOX ── */
+  .sar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .sar-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    text-align: center;
+  }
+  .sar-box .sar-letter {
+    font-size: 2rem;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .sar-box p { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* ── DAILY REMINDER ── */
+  .daily-reminder {
+    background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(255,101,132,0.1));
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: var(--radius);
+    padding: 36px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .daily-reminder .dr-icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .daily-reminder h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .daily-reminder p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 520px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+
+  /* ── SECTION ACCENT COLORS ── */
+  .s1 h2 { color: #6c63ff; }
+  .s2 h2 { color: #43e97b; }
+  .s3 h2 { color: #f9a825; }
+  .s4 h2 { color: #ff6584; }
+  .s5 h2 { color: #38bdf8; }
+  .s6 h2 { color: #c084fc; }
+  .s7 h2 { color: #fb923c; }
+  .s8 h2 { color: #34d399; }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .hero { padding: 60px 24px 40px; }
+    .toc { padding: 16px 20px; }
+    .container { padding: 40px 20px; }
+    .law-card { grid-template-columns: 1fr; }
+    .sar-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ HERO -->
+<div class="hero">
+  <div class="hero-badge">Complete Playbook</div>
+  <h1>The Career Path <span>Framework</span></h1>
+  <p>A step-by-step system for getting the job you want, standing out from the crowd, and negotiating what you're worth.</p>
+  <div class="hero-quote">
+    "If today was the last day of my life, would I want to do what I'm about to do today?"
+  </div>
+  <div style="margin-top:20px;font-size:0.85rem;color:var(--text-faint);">
+    For end-to-end guidance, refer to the
+    <a href="https://github.com/RCola22/reverse-interview/blob/master/career-path-guide.md" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;">Career Path Framework — The Complete Playbook ↗</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ NAV -->
+<nav class="toc">
+  <a href="#laws">4 Laws</a>
+  <a href="#career-check">Right Career?</a>
+  <a href="#skill-stack">Skill Stacking</a>
+  <a href="#star">Become a Star</a>
+  <a href="#interviews">Get Interviews</a>
+  <a href="#non-technical">The Interview</a>
+  <a href="#technical">Technical</a>
+  <a href="#offers">Offers & Negotiation</a>
+  <a href="#ecclesiastes">Ecclesiastes</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════ CONTAINER -->
+<div class="container">
+
+  <!-- ══════ SECTION 1: 4 LAWS -->
+  <section class="section s1" id="laws">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title-wrap">
+        <h2>The 4 Laws of Job Hunting</h2>
+        <div class="subtitle">The mindset foundation — get this right before everything else.</div>
+      </div>
+    </div>
+
+    <div class="law-card">
+      <div class="law-num" style="background:rgba(108,99,255,0.15);color:#6c63ff;">1</div>
+      <div>
+        <h3>The Fog — Get Wet, But You'll Get There</h3>
+        <p>The path forward is never perfectly clear. You won't see the whole staircase — just the next step. Stop waiting for clarity before you move. Walk into the fog anyway. Getting uncomfortable, confused, and uncertain is part of the process. You <em>will</em> get there.</p>
+      </div>
+    </div>
+
+    <div class="law-card">
+      <div class="law-num" style="background:rgba(67,233,123,0.12);color:#43e97b;">2</div>
+      <div>
+        <h3>Perception Is Reality — Put Your Best Foot Forward</h3>
+        <p>How you show up matters as much as your actual skills. Your resume, your LinkedIn, your GitHub, the way you carry yourself in an interview — these are the signals people use to form judgments. Control the narrative. Perception <em>is</em> reality until proven otherwise, so make sure the reality you project is the one you want.</p>
+      </div>
+    </div>
+
+    <div class="law-card">
+      <div class="law-num" style="background:rgba(249,168,37,0.12);color:#f9a825;">3</div>
+      <div>
+        <h3>Don't Be a Jr. — Kill the Imposter Syndrome</h3>
+        <p>Stop labeling yourself "junior." Don't apply to junior roles if you don't have to. The label creates a ceiling before you've even started. Every developer who got hired senior once felt like they didn't belong there. Imposter syndrome is universal — don't let it define your job title. Carry yourself like the engineer you're becoming, not the one you were.</p>
+      </div>
+    </div>
+
+    <div class="law-card">
+      <div class="law-num" style="background:rgba(255,101,132,0.12);color:#ff6584;">4</div>
+      <div>
+        <h3>Are You Swimming with Everyone Else?</h3>
+        <p>If you follow the exact same process as every other candidate — mass-applying on LinkedIn, sending the same resume template — you'll get the same results as everyone else: silence. Standing out requires doing something different. The candidates who get noticed are the ones who took an unexpected angle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SECTION 2: IS THIS CAREER RIGHT? -->
+  <section class="section s2" id="career-check">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title-wrap">
+        <h2>Is This Career Right for You?</h2>
+        <div class="subtitle">Don't skip this step. The most expensive mistake is chasing the wrong destination.</div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-icon">📖</div>
+      <div class="callout-body">
+        <strong>Required Reading: "So Good They Can't Ignore You" — Cal Newport</strong>
+        <p>Stop following your passion. Instead, build rare and valuable skills, then trade them for work you love. Passion follows mastery — not the other way around. Read this before you commit to a direction.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <h4>Explore career paths with intention</h4>
+        <p>Use a structured career path map to understand what skills are needed at each level. <strong>zerotomastery.io/career-paths</strong> is a great starting point for DevOps, development, and engineering tracks.</p>
+      </div>
+      <div class="step">
+        <h4>Ask yourself the hard question daily</h4>
+        <p>"If today was the last day of my life, would I want to do what I'm about to do today?" When the answer is no too many days in a row — something needs to change.</p>
+      </div>
+      <div class="step">
+        <h4>Read Ecclesiastes</h4>
+        <p>Perspective check. The clearest thinking about meaning, work, and what actually matters. See the <a href="#ecclesiastes" style="color:var(--accent);">Ecclesiastes & Mortality Framework</a> section at the end of this guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SECTION 3: SKILL STACKING -->
+  <section class="section s3" id="skill-stack">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title-wrap">
+        <h2>Skill Stacking</h2>
+        <div class="subtitle">Don't just learn skills. Stack them so the combination makes you rare.</div>
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <div class="callout-icon">⚡</div>
+      <div class="callout-body">
+        <strong>The Talent Stack Principle</strong>
+        <p>Being world-class at one thing is nearly impossible. But combining multiple good skills in a unique way can make you extraordinary. A developer who can also communicate, write, and understand business is worth far more than a developer alone.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="tag" style="background:rgba(249,168,37,0.15);color:#f9a825;">Step 1</div>
+        <h4>Identify Your Career Path</h4>
+        <p>Use <strong>zerotomastery.io/career-paths</strong> to map out the concrete skills required for your target role. Don't wander — follow a curated path.</p>
+      </div>
+      <div class="step">
+        <div class="tag" style="background:rgba(249,168,37,0.15);color:#f9a825;">Step 2</div>
+        <h4>Build Your Talent Stack</h4>
+        <p>Layer adjacent skills on top of your core skill. Example: DevOps engineer + Python automation + AI/Agentforce = uniquely positioned for the next wave of release management.</p>
+      </div>
+      <div class="step">
+        <div class="tag" style="background:rgba(249,168,37,0.15);color:#f9a825;">Step 3</div>
+        <h4>Develop Skills Every Single Day</h4>
+        <p>Non-negotiable. Learn something new every day. The compounding effect of daily skill-building over a year is staggering. Treat it like going to the gym — skip a day if you have to, but never miss two in a row.</p>
+      </div>
+      <div class="step">
+        <div class="tag" style="background:rgba(249,168,37,0.15);color:#f9a825;">Step 4</div>
+        <h4>Become a Star</h4>
+        <p>Don't just be competent. Be excellent enough that people talk about you. Build projects that make people say "wow." Write. Share. Teach. Visibility amplifies skill.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SECTION 4: BECOMING A STAR -->
+  <section class="section s4" id="star">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title-wrap">
+        <h2>Becoming a Star</h2>
+        <div class="subtitle">Your online presence is your 24/7 silent recruiter. Make it work for you.</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#ff6584,#ff8fa3);"></div>
+        <div class="card-icon">💼</div>
+        <h3>Portfolio</h3>
+        <p>Have <strong>1–2 really big projects</strong> that show the kind of worker you are. Quality over quantity. Use zerotomastery for project ideas. Build a clean HTML portfolio or GitHub Pages site.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#6c63ff,#9d8dff);"></div>
+        <div class="card-icon">📄</div>
+        <h3>Resume</h3>
+        <p>Don't spend too much time editing it. ATS-compliant, clean, and targeted. Use <strong>thisresumedoesnotexist.com</strong> and jobscan.co for ATS optimization. Customize it for each role you actually care about.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#38bdf8,#7dd3fc);"></div>
+        <div class="card-icon">💼</div>
+        <h3>LinkedIn</h3>
+        <p>Update your profile <strong>weekly</strong> when looking for work — it signals recruiters you're active. Get recommendations from real people. Optimize your headline and summary.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#43e97b,#86efac);"></div>
+        <div class="card-icon">🐙</div>
+        <h3>GitHub</h3>
+        <p>Contribute to open source. Set up a professional README. A green activity graph matters. Have real projects live and viewable.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#f9a825,#fcd34d);"></div>
+        <div class="card-icon">✍️</div>
+        <h3>Blog / Socials</h3>
+        <p>It's all about credibility. Writing publicly about what you know positions you as a practitioner, not just a learner. Even a few posts go a long way.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#c084fc,#e879f9);"></div>
+        <div class="card-icon">🌐</div>
+        <h3>Quick Profile Setup</h3>
+        <p>No online presence yet? Start at <strong>profileme.dev</strong> for a quick GitHub profile README. Use GitHub Pages for a free portfolio site.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 12px;color:var(--text);">Resume Resources</h3>
+    <table class="resource-table">
+      <thead>
+        <tr><th>Tool</th><th>Use For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://www.resumemaker.online" target="_blank">resumemaker.online</a></td><td>Quick, clean resume building</td></tr>
+        <tr><td><a href="https://www.open-resume.com" target="_blank">open-resume.com</a></td><td>Open source, customizable</td></tr>
+        <tr><td><a href="https://thisresumedoesnotexist.com" target="_blank">thisresumedoesnotexist.com</a></td><td>AI-generated examples for inspiration ⭐</td></tr>
+        <tr><td><a href="https://www.jobscan.co" target="_blank">jobscan.co</a></td><td>ATS compliance scanning</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ══════ SECTION 5: GETTING INTERVIEWS -->
+  <section class="section s5" id="interviews">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title-wrap">
+        <h2>Getting More Interviews</h2>
+        <div class="subtitle">Setup time: less than a week. Then execute with precision, not volume.</div>
+      </div>
+    </div>
+
+    <div class="callout green" style="margin-bottom:24px;">
+      <div class="callout-icon">🗺️</div>
+      <div class="callout-body">
+        <strong>Use This as Your Job Search Outline</strong>
+        <p><a href="https://coggle.it/diagram/Z3bPo0lqh415JkcK/t/%F0%9F%92%B0-getting-your-dream-job-%F0%9F%92%BB/0bc472f8a0be63202e6fb1c9c10ef137677ad91aae30dbd1930d7496cedda3c7" target="_blank" style="color:var(--accent3);font-weight:700;">Get Your Dream Job Mind Map ↗</a> — a visual overview of the full job search path. Open this first and keep it close.</p>
+      </div>
+    </div>
+
+    <div class="callout purple">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-body">
+        <strong>Targeted Approach — 5 Companies at a Time, 1 Week</strong>
+        <p>No shotgun strategy. Sending out 100 resumes is lazy and ineffective. Pick 5 companies. Research them deeply. Personalize your approach. Then move to the next 5.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:24px 0 16px;">Where to Find Jobs</h3>
+    <table class="resource-table">
+      <thead>
+        <tr><th>Platform</th><th>Best For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>LinkedIn Jobs</td><td>General roles, recruiter outreach</td></tr>
+        <tr><td>Hacker News (Ask HN: Who's Hiring)</td><td>Tech startups, remote — search current month</td></tr>
+        <tr><td><a href="https://wellfound.com" target="_blank">WellFound (AngelList)</a></td><td>Startups, equity-focused roles</td></tr>
+        <tr><td><a href="https://weworkremotely.com" target="_blank">We Work Remotely</a></td><td>Remote positions</td></tr>
+        <tr><td><a href="https://remoteok.com" target="_blank">RemoteOK</a></td><td>Remote positions</td></tr>
+        <tr><td>Meetup.com</td><td>Local networking, hidden opportunities</td></tr>
+        <tr><td>Local job boards</td><td>Fewer applicants, faster pipeline</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;">Unique Strategies That Actually Work</h3>
+    <div class="steps">
+      <div class="step">
+        <h4>Research everything about the company</h4>
+        <p>Google them thoroughly. Attend company events. Talk to employees. Be able to say "after having coffee with [name], this is where I need to be."</p>
+      </div>
+      <div class="step">
+        <h4>Find their tech stack</h4>
+        <p>Use <strong>stackshare.io</strong> to identify what tools they use. Then customize your outreach and resume around those specific technologies.</p>
+      </div>
+      <div class="step">
+        <h4>Identify and solve one of their problems</h4>
+        <p>Show up with an observation: "I noticed your deploy pipeline does X — I've solved this before by doing Y." This is almost impossible to ignore.</p>
+      </div>
+      <div class="step">
+        <h4>Contribute to their open source</h4>
+        <p>Find a good first issue on <strong>goodfirstissue.dev</strong>. Submit a PR. Then reference it in your outreach. You've already added value before the first call.</p>
+      </div>
+      <div class="step">
+        <h4>Show up unannounced</h4>
+        <p>Bold move. Not always appropriate — but for the right company, walking in and asking to speak to the hiring manager leaves an impression that no email can.</p>
+      </div>
+      <div class="step">
+        <h4>Freelance as a cheat code</h4>
+        <p>Use Upwork to build real experience and real deliverables. Freelance work becomes portfolio work becomes interview talking points.</p>
+      </div>
+      <div class="step">
+        <h4>Use AI to brainstorm your approach</h4>
+        <p>Prompt: <em>"I want to apply to [company] in [state]. What's the best way to apply and stand out creatively?"</em></p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;">Cold Email Approach</h3>
+    <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:16px;">The best way to get interviews is through <strong>referrals</strong>. Skip the resume whenever possible — ask to talk, ask to meet, ask how you can solve their problem. When you must email, use this framework:</p>
+
+    <div class="email-template">
+      Hey <span class="highlight">$NAME</span>,<br><br>
+      I saw your presentation at <span class="highlight">$CONFERENCE</span> last year on YouTube.<br>
+      Great stuff — loved what you did with <span class="highlight">$FOO</span>, in particular<br>
+      <span class="highlight">$COMMENT_PROVING_YOU_KNOW_WHAT_YOURE_TALKING_ABOUT</span>.<br><br>
+      I'm also a <span class="highlight">$FOO</span> developer. I noticed your company is hiring<br>
+      for <span class="highlight">$ROLE</span>. I'd love to be a part of your team. Do you have a<br>
+      few minutes to chat on Thursday about what you're building?<br><br>
+      Thanks,<br>
+      <span class="highlight">Your Name</span><br>
+      <span class="highlight">yourwebsite.com</span>
+    </div>
+
+    <div class="pills">
+      <span class="pill purple">Hunter.io Chrome Ext</span>
+      <span class="pill purple">ContactOut Chrome Ext</span>
+      <span class="pill purple">Email Extractor Chrome Ext</span>
+    </div>
+
+    <div class="callout orange">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Cover Letters: Quality Over Quantity</strong>
+        <p>Send 5–10 personalized letters. Know your unique competencies. Match them to the company's specific needs from the job description. Never send a generic letter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SECTION 6: THE INTERVIEW (NON-TECHNICAL) -->
+  <section class="section s6" id="non-technical">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-title-wrap">
+        <h2>The Interview — Non-Technical</h2>
+        <div class="subtitle">Think of the interview as a date. You're both deciding if this is a good fit.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:0 0 20px;">Your 4 Hero Stories</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#c084fc,#e879f9);"></div>
+        <div class="card-icon">⚙️</div>
+        <h3>Technical Story</h3>
+        <p>This is where your projects shine. Walk them through a real problem you solved technically.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#43e97b,#86efac);"></div>
+        <div class="card-icon">🏆</div>
+        <h3>Success Story</h3>
+        <p>Show you are a successful person — not just a successful employee. Make it personal and real.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#38bdf8,#7dd3fc);"></div>
+        <div class="card-icon">👥</div>
+        <h3>Leadership Story</h3>
+        <p>How did you direct, influence, or carry others? Leadership isn't a title — it's behavior.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent" style="background:linear-gradient(90deg,#f9a825,#fcd34d);"></div>
+        <div class="card-icon">🧗</div>
+        <h3>Challenge Story</h3>
+        <p>What challenged you and how did you overcome it? Show grit. Show growth.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;">Mindset Going In</h3>
+    <ul class="checklist">
+      <li><span>Use phrases like <strong>"I'm looking for a good mutual fit"</strong> — it shifts the power dynamic</span></li>
+      <li><span>Read about <strong>Mirroring</strong> and <strong>The Chameleon Effect</strong> — subtle techniques that build rapport</span></li>
+      <li><span>Get in the mindset that the interviewer is your friend, not a judge</span></li>
+      <li><span>Tell them you're not a "know-it-all" and are always willing to collaborate</span></li>
+      <li><span>Always be a shining ray of sunshine — energy is contagious</span></li>
+      <li><span><strong>Always appear confident</strong> — fake it until your skills catch up</span></li>
+    </ul>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;">Key Questions — How to Answer</h3>
+
+    <div style="margin-bottom:20px;">
+      <h4 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:8px;">Tell me about yourself</h4>
+      <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:10px;">3 things to cover: your triggers of success, skills relevant to the role, and things you want them to ask you about. Answer in under a minute. Tell your hero's journey.</p>
+      <div class="story-box">
+        <div class="story-label">Example — No Prior Experience</div>
+        <p>"A few years back I got really interested in coding when I started a little side business. I'd hire developers and it was always a black box — I'd pay money and get back a product I was never fully satisfied with. So I started teaching myself to code because I wanted to understand how that black box works. The more I learned, the more engulfed I became. I started building projects, writing blog posts about technical subjects that were received really well. What I'm trying to say is — through these projects, every day I'm becoming a better coder. To the point that now I feel very confident about being a valuable asset to your team — not just now, but a year from now, where I expect my skills to grow exponentially."</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <h4 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:8px;">Why do you want to work here?</h4>
+      <p style="font-size:0.875rem;color:var(--text-muted);">Show you want to grow. Demonstrate you're the best fit. Make them feel special — you specifically chose <em>them</em>. Reference something real you researched about the company.</p>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <h4 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:8px;">Tell me about a problem and how you solved it</h4>
+      <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:12px;">Use the <strong>SAR Method</strong>. Have metrics and numbers ready. Touch on scaling, performance, or security.</p>
+      <div class="sar-grid">
+        <div class="sar-box">
+          <span class="sar-letter" style="color:#6c63ff;">S</span>
+          <p>Situation — set the scene</p>
+        </div>
+        <div class="sar-box">
+          <span class="sar-letter" style="color:#43e97b;">A</span>
+          <p>Action — what you did</p>
+        </div>
+        <div class="sar-box">
+          <span class="sar-letter" style="color:#f9a825;">R</span>
+          <p>Result — with numbers</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <h4 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:8px;">What's your biggest weakness?</h4>
+      <p style="font-size:0.875rem;color:var(--text-muted);">Give a <em>real</em> answer — then show how you improved it. Example: "Sometimes when there's a problem, I jump straight to coding without fully thinking it through first. I realized this was slowing me down, so now I focus on writing pseudo-code and comments before I write a single line — mapping out the problem and my assumptions first."</p>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;">Secret Weapons — Work These Into Conversation</h3>
+    <ul class="checklist">
+      <li><span><strong>Simplicity over complexity</strong> — "I always favor the simplest solution that solves the problem."</span></li>
+      <li><span><strong>Premature optimization is the root of all evil</strong> — Show you understand time, resources, and tradeoffs. Is a 1% performance improvement worth the effort right now?</span></li>
+      <li><span><strong>Overall goal, not myopic</strong> — Show you focus on what the client actually needs, not just the narrow technical task in front of you.</span></li>
+      <li><span><strong>No ego</strong> — Let your work ethic speak. No complaining about codebases, clients, or colleagues.</span></li>
+      <li><span><strong>Always comfortable with clients</strong> — Show you're the type of person they'd put in front of anyone.</span></li>
+    </ul>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;">Questions to Ask the Interviewer</h3>
+    <ul class="checklist">
+      <li><span>What's the greatest mistake you made in your first month, and what did you do?</span></li>
+      <li><span>Where do you see this company going in the next 3–5 years?</span></li>
+      <li><span>Why did you personally join this company?</span></li>
+      <li><span>Have you seen your own skills grow in the past year?</span></li>
+      <li><span><strong>What do you wish someone had told you when you started here?</strong> ⭐</span></li>
+      <li><span>Have you ever messed up at this job, and how did the company handle it?</span></li>
+    </ul>
+
+    <div class="callout purple">
+      <div class="callout-icon">📬</div>
+      <div class="callout-body">
+        <strong>Always Send a Follow-Up Note</strong>
+        <p>After the interview, send a thank-you that also addresses any questions you stumbled on. This small gesture goes a long way — and almost nobody does it. Use it to land one more strong reason why they should hire you.</p>
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <div class="callout-icon">🧠</div>
+      <div class="callout-body">
+        <strong>The Most Important Mindset Shift</strong>
+        <p>"Don't hope to get hired at all. Treat every interview as a learning experience." This detachment removes panic, reduces anxiety, and ironically makes you perform better. You are valuable. This is not do-or-die.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SECTION 7: TECHNICAL INTERVIEW -->
+  <section class="section s7" id="technical">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-title-wrap">
+        <h2>The Technical Interview</h2>
+        <div class="subtitle">Prepare your body and mind — not just your knowledge.</div>
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <div class="callout-icon">🧘</div>
+      <div class="callout-body">
+        <strong>Pre-Interview Meditation</strong>
+        <p>Before every interview, do a short meditation. Keep one bookmarked and ready. This is not optional — your mental state going in is a variable you can control. Use it.</p>
+      </div>
+    </div>
+
+    <ul class="checklist">
+      <li><span>Have your <strong>Technical Hero Story</strong> prepared with real project examples</span></li>
+      <li><span>Know your metrics — numbers, scale, performance improvements</span></li>
+      <li><span>Practice explaining complex topics simply — a senior engineer can explain things a junior can understand</span></li>
+      <li><span>Be honest when you don't know something — "I haven't worked with X, but here's how I'd approach learning it..."</span></li>
+      <li><span>Use white-boarding to show your thinking process, not just your answer</span></li>
+    </ul>
+  </section>
+
+  <!-- ══════ SECTION 8: OFFERS + NEGOTIATION -->
+  <section class="section s8" id="offers">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-title-wrap">
+        <h2>Offers & Negotiation</h2>
+        <div class="subtitle">Always negotiate. The worst they can say is no — and most people never even ask.</div>
+      </div>
+    </div>
+
+    <div class="callout red">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>On Rejection</strong>
+        <p>Rejection doesn't go on your resume. It doesn't go on your profile. It just disappears. It is not a prediction of your future success. Always ask the interviewer for feedback and when you can reapply.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:28px 0 16px;">Salary Question — Use Anchoring</h3>
+    <div class="story-box">
+      <div class="story-label">Script</div>
+      <p>"I know the average [role] salary range is [$$$] per year, so I think that's a good place for us to start."</p>
+    </div>
+    <p style="font-size:0.875rem;color:var(--text-muted);margin-top:12px;">You're starting the conversation, not ending it. Don't give a specific number first. Let them move toward your anchor. Always ask for $10,000 more than your actual target.</p>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:28px 0 16px;">When They Give You an Offer</h3>
+    <div class="steps">
+      <div class="step">
+        <h4>Don't end the conversation — keep it going</h4>
+        <p>Be positive. Express genuine excitement. Then ask for more time: "This is a big family decision and I'd like to discuss it before committing."</p>
+      </div>
+      <div class="step">
+        <h4>Let other companies know you have an offer (your stake)</h4>
+        <p>You have leverage now. Use it. Email every company you're interviewing with to compress their timeline: "I've received a strong offer and I'm really excited about your company — is there anything we can do to move faster?"</p>
+      </div>
+      <div class="step">
+        <h4>Always give a reason for what you're asking</h4>
+        <p>Reason-giving softens every negotiation. "Because I'm looking for a long-term home and this is a big decision" is a complete justification.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:28px 0 16px;">Handling Multiple Offers (The Goal State)</h3>
+    <ul class="checklist">
+      <li><span>Is there an offer where you feel unqualified? <strong>Take it</strong> — you're taking the job to grow.</span></li>
+      <li><span>Where is the greatest <strong>long-term growth potential</strong>?</span></li>
+      <li><span>Will you respect and learn from the people around you?</span></li>
+      <li><span>Are you deciding based on <strong>desperation</strong> vs. genuine fit?</span></li>
+      <li><span>Ask: "Will I be in the same position 2 years from now?" Don't pick the easy job.</span></li>
+    </ul>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:28px 0 16px;">Salary Research</h3>
+    <div class="pills">
+      <span class="pill green">salary.com</span>
+      <span class="pill green">payscale.com</span>
+      <span class="pill green">glassdoor.com</span>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;">Getting a Raise — Start From Day One</h3>
+    <div class="steps">
+      <div class="step">
+        <h4>Keep a folder of everything you've done</h4>
+        <p>From month one: problems solved, money saved, great feedback from clients and co-workers, skill progression over 6 months, and what you plan to accomplish next.</p>
+      </div>
+      <div class="step">
+        <h4>When asking for a raise, show don't tell</h4>
+        <p>Write a one-page summary or email to your manager with proof you're driving the metrics that matter to them. No reason = no raise. Give them a reason to say yes.</p>
+      </div>
+      <div class="step">
+        <h4>Just ask</h4>
+        <p>This sounds simple because it is. If you never ask, the answer is always no.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ DAILY REMINDER -->
+  <div class="daily-reminder">
+    <div class="dr-icon">🔥</div>
+    <h3>Always Stay Teachable</h3>
+    <p>"If today was the last day of my life, would I want to do what I'm about to do today? When the answer is no for too many days in a row, I know I need to change something."</p>
+  </div>
+
+  <!-- ══════ ECCLESIASTES SECTION -->
+  <section class="section" id="ecclesiastes" style="margin-top:72px;">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div class="section-title-wrap">
+        <h2 style="color:#a78bfa;">Ecclesiastes &amp; The Mortality Framework</h2>
+        <div class="subtitle">The daily question isn't just motivational language — it maps onto some of the oldest and clearest thinking about urgency, meaning, and action.</div>
+      </div>
+    </div>
+
+    <!-- Concept Table -->
+    <table class="resource-table" style="margin-bottom:40px;">
+      <thead>
+        <tr>
+          <th>Concept</th>
+          <th>Steve Jobs</th>
+          <th>Ecclesiastes Philosophy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#a78bfa;font-weight:700;">The Catalyst</td>
+          <td>"Remembering you will be dead soon"</td>
+          <td>"Death is the destiny of everyone" (7:2)</td>
+        </tr>
+        <tr>
+          <td style="color:#a78bfa;font-weight:700;">The Action</td>
+          <td>"Make the biggest choices"</td>
+          <td>"Do it with all your might" (9:10)</td>
+        </tr>
+        <tr>
+          <td style="color:#a78bfa;font-weight:700;">The Result</td>
+          <td>Avoiding the trap of thinking you have something to lose</td>
+          <td>Finding meaning in a "vapor-like" (hevel) existence</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Passage 1 -->
+    <div class="card" style="margin-bottom:16px;border-color:rgba(167,139,250,0.3);">
+      <div class="card-accent" style="background:linear-gradient(90deg,#a78bfa,#c084fc);"></div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2rem;flex-shrink:0;">⚡</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:8px;">1. The Call to Urgent Action — Ecclesiastes 9:10</div>
+          <div style="background:var(--surface2);border-left:3px solid #a78bfa;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin-bottom:14px;font-style:italic;font-size:0.9rem;color:var(--text-muted);line-height:1.7;">
+            "Whatever your hand finds to do, do it with all your might, for in the realm of the dead, where you are going, there is neither working nor planning nor knowledge nor wisdom."
+          </div>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.65;"><strong style="color:var(--text);">The Connection:</strong> Like the Jobs quote, this verse uses the finality of death as a catalyst. It suggests that "big choices" shouldn't be met with hesitation, but with total commitment — because our window of opportunity is closing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Passage 2 -->
+    <div class="card" style="margin-bottom:16px;border-color:rgba(167,139,250,0.3);">
+      <div class="card-accent" style="background:linear-gradient(90deg,#a78bfa,#c084fc);"></div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2rem;flex-shrink:0;">🪞</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:8px;">2. The Perspective Shift — Ecclesiastes 7:2–4</div>
+          <div style="background:var(--surface2);border-left:3px solid #a78bfa;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin-bottom:14px;font-style:italic;font-size:0.9rem;color:var(--text-muted);line-height:1.7;">
+            "It is better to go to a house of mourning than to go to a house of feasting, for death is the destiny of everyone; the living should take this to heart... The heart of the wise is in the house of mourning, but the heart of fools is in the house of pleasure."
+          </div>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.65;"><strong style="color:var(--text);">The Connection:</strong> Taking death to heart shifts your perspective. When you are in the "house of mourning," the trivialities of life fall away — allowing you to focus on the choices that actually matter.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Passage 3 -->
+    <div class="card" style="margin-bottom:40px;border-color:rgba(167,139,250,0.3);">
+      <div class="card-accent" style="background:linear-gradient(90deg,#a78bfa,#c084fc);"></div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2rem;flex-shrink:0;">🧭</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:8px;">3. The "Seize the Day" Command — Ecclesiastes 11:9–12:1</div>
+          <div style="background:var(--surface2);border-left:3px solid #a78bfa;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin-bottom:14px;font-style:italic;font-size:0.9rem;color:var(--text-muted);line-height:1.7;">
+            "Be happy, young person, while you are young... follow the ways of your heart and whatever your eyes see... Remember your Creator in the days of your youth, before the days of trouble come."
+          </div>
+          <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.65;"><strong style="color:var(--text);">The Connection:</strong> Use mortality as a compass. Live authentically and make choices based on your heart's desires — but do so with the sobering filter of knowing your time is limited.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Closing callout -->
+    <div class="callout purple">
+      <div class="callout-icon">📖</div>
+      <div class="callout-body">
+        <strong>The Through-Line</strong>
+        <p>The Jobs quote and Ecclesiastes are saying the same thing across thousands of years: death is not something to fear — it's the filter that clarifies what actually matters. Let it sharpen your choices, not paralyze them.</p>
+      </div>
+    </div>
+
+  </section>
+
+</div><!-- /container -->
+
+</body>
+</html>
