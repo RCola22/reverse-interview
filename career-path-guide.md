@@ -143,6 +143,7 @@ Use a **targeted approach: 5 companies at a time, 1 week at a time.**
 - Email employees and HR people directly
 - Try to get in the door for an interview, not just submit a form
 - Apply locally when possible — local companies have fewer applicants
+- Get Your Dream Job Mind Map: https://coggle.it/diagram/Z3bPo0lqh415JkcK/t/%F0%9F%92%B0-getting-your-dream-job-%F0%9F%92%BB/0bc472f8a0be63202e6fb1c9c10ef137677ad91aae30dbd1930d7496cedda3c7
 
 ### Where to Find Jobs
 
